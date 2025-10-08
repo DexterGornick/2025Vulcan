@@ -1,8 +1,8 @@
 package frc.robot;
-
+//importing a lot of stuff 
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.auto.AutoBuilder;
-
+//importing the controles
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -42,6 +42,7 @@ import frc.robot.subsystems.Swerve;
  */
 public class RobotContainer {
         /* Subsystems */
+        //making hella classes
         private final Swerve s_Swerve = new Swerve();
         private final Arm arm = new Arm();
         public final Shooter shooter = new Shooter();
@@ -57,11 +58,13 @@ public class RobotContainer {
         // private final Joystick operator = new Joystick(1);
 
         /* Drive Controls */
+        // assinging the xbox controler
         private final int translationAxis = XboxController.Axis.kLeftY.value;
         private final int strafeAxis = XboxController.Axis.kLeftX.value;
         private final int rotationAxis = XboxController.Axis.kRightX.value;
         private final int climbAxis = XboxController.Axis.kRightY.value;
         /* Driver Buttons */
+        // saying what each buttion does
         private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kX.value);
         private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kStart.value);
         // private final JoystickButton IntakePos = new JoystickButton(driver, XboxController.Button.kX.value);
@@ -82,7 +85,7 @@ public class RobotContainer {
          * The container for the robot. Contains subsystems, OI devices, and commands.
          */
         public RobotContainer() {
-
+                //importing more contoles like the gyro for the swerve
                 SmartDashboard.putBoolean("RobotGyro", s_Swerve.getGyroCheck());
 
                 NamedCommands.registerCommand("IntakePos", new TeleopArm(arm, intakePivot, -60, 98).withTimeout(1));
@@ -125,7 +128,7 @@ public class RobotContainer {
 
                 autoChooser = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("Auto Chooser", autoChooser);
-                // Configure the button bindings
+                // Buttion bindings
                 configureButtonBindings();
 
         }
@@ -153,7 +156,7 @@ public class RobotContainer {
 
                 // },
                 // Arm));
-
+                // making it so it can lock gyro
                 shootButton.onTrue(new TeleopIntake(intake, -0.1, 0.2, s_Swerve::getGyroCheck)
                                 .andThen(new TeleopShooter(intake, 1, 1, s_Swerve::getGyroCheck))
                                 .andThen(new ParallelCommandGroup(
